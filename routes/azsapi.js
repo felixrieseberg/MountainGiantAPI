@@ -67,7 +67,7 @@ module.exports = function (app) {
                 if (error) {
                     console.log("Coupon couldn't be found, error: " + error);
                     res.send({ message: "Error", reason: "Something went wrong." });
-                } else if (result) {
+                } else if (result.length > 0) {
                     console.log(result);
                     var couponValue = result[0]
                     res.send(result[0]);

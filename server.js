@@ -32,6 +32,11 @@ app.configure('development', function(){
 * -------------------------------------------------------------------------------------------------
 **/
 
+// Production?
+if (process.env.production != true) {
+    require('./development');
+}
+
 require('./routes/azsapi')(app);
 
 // Redirect if user stumbles upon the site
