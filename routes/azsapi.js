@@ -66,10 +66,13 @@ module.exports = function (app) {
             Coupon.find({ identifier: identifier}, function (error, result) {
                 if (error) {
                     console.log("Coupon couldn't be found, error: " + error);
-                    res.send({ message: "Error", reason: "Coupon couldn't be found." });
-                } else {
+                    res.send({ message: "Error", reason: "Something went wrong." });
+                } else if (result) {
                     console.log(result);
+                    var couponValue = result[0]
                     res.send(result[0]);
+                } else {
+                    res.send({ message: "Error", reason: "Coupon couldn't be found." });
                 }
             })
         } else {
