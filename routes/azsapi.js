@@ -66,7 +66,7 @@ module.exports = function (app) {
             Coupon.find({ identifier: identifier}, function (error, result) {
                 if (error) {
                     console.log("Coupon couldn't be found, error: " + error);
-                    res.send({ error: "Coupon couldn't be found." });
+                    res.send({ message: "Error", reason: "Coupon couldn't be found." });
                 } else {
                     console.log(result);
                     res.send(result);
@@ -74,7 +74,7 @@ module.exports = function (app) {
             })
         } else {
             console.log("Provided parameters insufficient. Provided: " + req.params.couponId);
-            res.send({ error: "Provided parameters insufficient." });
+            res.send({ message: "Error", reason: "Provided parameters insufficient." });
         }
 
     });
@@ -92,7 +92,7 @@ module.exports = function (app) {
             Coupon.find({ identifier: identifier}, function (error, result) {
                 if (error) {
                     console.log("Coupon couldn't be found, error: " + error);
-                    res.send({ error: "Coupon couldn't be found." });
+                    res.send({ message: "Error", reason: "Coupon couldn't be found." });
                 } else {
                     console.log(result);
                     Coupon.update(
@@ -101,11 +101,11 @@ module.exports = function (app) {
                         function (error, numberAffected, raw) {
                             if (error) {
                                 console.log("Coupon could not be updated");
-                                res.send({ error: "Coupon could not be updated"});
+                                res.send({ message: "Error", reason: "Coupon could not be updated." });
                             } else {
                                 console.log("Update successfull. MongoDB items updated: " + numberAffected);
                                 console.log("Raw response was: " + raw);
-                                res.send({ success: "Coupon " + identifier + " consumed"});
+                                res.send({ message: "Ok", reason: identifier + " consumed"});
                             }
                         }
                     )
@@ -113,7 +113,7 @@ module.exports = function (app) {
             })
         } else {
             console.log("Provided parameters insufficient. Provided: " + req.params.couponId);
-            res.send({ error: "Provided parameters insufficient." });
+            res.send({ message: "Error", reason: "Provided parameters insufficient." });
         }
 
     });
@@ -139,12 +139,12 @@ module.exports = function (app) {
                     console.log("We encountered an error: " + error)
                 } else {
                     console.log("Save without error");
-                    res.send({ success: "Coupon created" });
+                    res.send({ message: "Ok", reason: "Coupon created." });
                 }
             });
 
         } else {
-            res.send({ error: "Provided parameters insufficient." });
+            res.send({ message: "Error", reason: "Provided parameters insufficient." });
         }
     });
 
