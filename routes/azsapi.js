@@ -69,8 +69,9 @@ module.exports = function (app) {
                     res.send({ message: "Error", reason: "Something went wrong." });
                 } else if (result.length > 0) {
                     console.log(result);
-                    var couponValue = result[0]
-                    res.send(result[0]);
+                    var couponValue = result[0].value;
+                    var couponUsed = result[0].used;
+                    res.send({ message: "Ok", value: couponValue, used: couponUsed});
                 } else {
                     res.send({ message: "Error", reason: "Coupon couldn't be found." });
                 }
