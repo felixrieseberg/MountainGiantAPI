@@ -3,13 +3,13 @@
 module.exports = function (app) {
 
     // Creating coupon manager and connection to MongoLab
-    var base = "/api/azs/1/";
+    var base = "/azs/1.0/";
 
     // ----------------------------------------------------------------------------------------
     // Connect
     // ----------------------------------------------------------------------------------------
-    var mongo_user = "";
-    var mongo_password = "";
+    var mongo_user = process.env.mongoUser;
+    var mongo_password = process.env.mongoPassword;
 
     if (mongo_user == "" || mongo_password == "") {
         console.log("Mongo authentication not present, trying to get from environment!");

@@ -34,6 +34,11 @@ app.configure('development', function(){
 
 require('./routes/azsapi')(app);
 
+// Redirect if user stumbles upon the site
+app.get('/', function (req, res) {
+    res.redirect('http://www.mountainandgiant.com');
+})
+
 http.createServer(app).listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));
 });
