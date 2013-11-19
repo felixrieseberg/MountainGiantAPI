@@ -1,0 +1,1 @@
+connection error: { [MongoError: auth fails] name: 'MongoError', code: 18, ok: 0, errmsg: 'auth fails' }

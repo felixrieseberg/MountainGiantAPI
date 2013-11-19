@@ -69,7 +69,7 @@ module.exports = function (app) {
                     res.send({ message: "Error", reason: "Coupon couldn't be found." });
                 } else {
                     console.log(result);
-                    res.send(result);
+                    res.send(result[0]);
                 }
             })
         } else {
