@@ -35,6 +35,10 @@ module.exports = function (app) {
             console.log("Error: Connection to MongoDB failed");
             setTimeout(connectMongo, 60000)
         });
+        db.on('disconnected', function callbackDisconnect() {
+            console.log("Error: Connection to MongoDB broke");
+            connectMongo();
+        });
         db.once('open', function callbackOpen () {
           console.log("We have a connection!");
         });
