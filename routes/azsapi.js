@@ -8,8 +8,13 @@ module.exports = function (app) {
     // ----------------------------------------------------------------------------------------
     // Connect
     // ----------------------------------------------------------------------------------------
-    var mongo_user = process.env.mongoUser;
-    var mongo_password = process.env.mongoPassword;
+
+    var mongoose = require('mongoose');
+    mongoose.set('debug', true)
+    var Schema = mongoose.Schema;
+
+    var mongo_user = "azsuser"; //process.env.mongoUser;
+    var mongo_password = "Fa6RpRtOuJ"; //process.env.mongoPassword;
 
     if (mongo_user == "" || mongo_password == "") {
         console.log("Mongo authentication not present, trying to get from environment!");
@@ -18,20 +23,26 @@ module.exports = function (app) {
     }
 
     var options = {};
+    options.server = {};
     options.server.socketOptions = { keepAlive: 1 };
     var mongodb = "mongodb://" + mongo_user + ":" + mongo_password + "@mg-mongo.cloudapp.net:27020/awesomezombiesniper";
 
-    var mongoose = require('mongoose');
-    mongoose.set('debug', true)
-    var Schema = mongoose.Schema;
-    
-    mongoose.connect(mongodb, op);
+    var connectMongo = function() {
+        mongoose.connect(mongodb, options);
 
-    var db = mongoose.connection;
-    db.on('error', console.error.bind(console, 'connection error:'));
-    db.once('open', function callback () {
-      console.log("We have a connection!");
-    });
+        var db = mongoose.connection;
+        db.on('error', function callbackError() {
+            console.log("Error: Connection to MongoDB failed");
+            setTimeout(connectMongo, 60000)
+        });
+        db.once('open', function callbackOpen () {
+          console.log("We have a connection!");
+        });
+    }
+
+    connectMongo();
+
+    // Schema
 
     var couponSchema = new Schema({
         identifier: String,
