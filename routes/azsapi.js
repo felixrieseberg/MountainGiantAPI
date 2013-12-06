@@ -18,7 +18,7 @@ module.exports = function (app) {
     }
 
     var options = {};
-    options.server.socketOptions = options.replset.socketOptions = { keepAlive: 1 };
+    options.server.socketOptions = { keepAlive: 1 };
     var mongodb = "mongodb://" + mongo_user + ":" + mongo_password + "@mg-mongo.cloudapp.net:27020/awesomezombiesniper";
 
     var mongoose = require('mongoose');
