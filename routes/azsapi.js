@@ -17,12 +17,14 @@ module.exports = function (app) {
         mongo_password = process.env.mongo_password;
     }
 
+    var options = {};
+    options.server.socketOptions = options.replset.socketOptions = { keepAlive: 1 };
     var mongodb = "mongodb://" + mongo_user + ":" + mongo_password + "@mg-mongo.cloudapp.net:27020/awesomezombiesniper";
 
     var mongoose = require('mongoose');
     var Schema = mongoose.Schema;
     
-    mongoose.connect(mongodb);
+    mongoose.connect(mongodb, op);
 
     var db = mongoose.connection;
     db.on('error', console.error.bind(console, 'connection error:'));
@@ -61,6 +63,8 @@ module.exports = function (app) {
         var used;
 
         console.log("Init: Trying to find coupon");
+
+
 
         if (identifier) {
             Coupon.find({ identifier: identifier}, function (error, result) {
