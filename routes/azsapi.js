@@ -13,8 +13,8 @@ module.exports = function (app) {
     mongoose.set('debug', true)
     var Schema = mongoose.Schema;
 
-    var mongo_user = "azsuser"; //process.env.mongoUser;
-    var mongo_password = "Fa6RpRtOuJ"; //process.env.mongoPassword;
+    var mongo_user = process.env.mongoUser;
+    var mongo_password = process.env.mongoPassword;
 
     if (mongo_user == "" || mongo_password == "") {
         console.log("Mongo authentication not present, trying to get from environment!");
