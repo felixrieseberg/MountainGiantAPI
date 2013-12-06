@@ -34,7 +34,7 @@ app.configure('development', function(){
 
 // Production?
 if (process.env.production != true) {
-    //require('./development');
+    require('./development');
 }
 
 require('./routes/azsapi')(app);

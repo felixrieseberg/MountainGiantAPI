@@ -22,6 +22,7 @@ module.exports = function (app) {
     var mongodb = "mongodb://" + mongo_user + ":" + mongo_password + "@mg-mongo.cloudapp.net:27020/awesomezombiesniper";
 
     var mongoose = require('mongoose');
+    mongoose.set('debug', true)
     var Schema = mongoose.Schema;
     
     mongoose.connect(mongodb, op);
